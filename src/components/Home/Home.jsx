@@ -1,8 +1,14 @@
 import React from 'react';
+import Banner from '../Banner/Banner';
+import CategorySection from '../../Pages/Category/CategorySection';
 
 const Home = () => {
     return (
-        <div>
+        <div className=' '>
+             <Banner></Banner>
+             <CategorySection></CategorySection>
+
+             
             
         </div>
     );

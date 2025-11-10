@@ -1,19 +1,22 @@
-import React from "react";
-import { NavLink } from "react-router";
-import logo from '../../assets/logo pawmart.png';
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { Link, Links, NavLink } from "react-router";
+import { IoAddCircle, IoLogIn, IoLogOut } from "react-icons/io5";
+import { FaEarListen, FaFirstOrderAlt, FaGear } from "react-icons/fa6";
+import { FaCashRegister, FaHome, FaUser } from "react-icons/fa";
+import logo from "../../assets/logo pawmart.png";
+import { MdPets } from "react-icons/md";
+import { GiLoveMystery } from "react-icons/gi";
 
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
 
-    const links = <>
 
-    <li><NavLink to={"/"}>Home</NavLink></li>
-    <li><NavLink to={'/allpetsupplies'}>Pets & Supplies</NavLink></li>
-    </>
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar w-11/12  mx-auto py-0 min-h-0 z-1  h-18  shadow-sm glass-card bg-[#D9BFA2]">
       <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+        <div className="dropdown ">
+          <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -32,23 +35,127 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="  menu  menu-sm dropdown-content bg-base-100 rounded-box z-1 mb-20  w-52 p-2 shadow"
           >
-           {links}
+            <li className=" "> 
+            <NavLink to={"/"}> <FaHome />Home</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/allpetsupplies"}><MdPets />Pets &amp; Supplies</NavLink>
+          </li>
+            <li>
+            <NavLink to={"/addlisting"}><FaEarListen />Add Listing</NavLink>
+           </li>
+            <li>
+            <NavLink to={"/mylistings"}><GiLoveMystery />My Listings</NavLink>
+           </li>
+            <li>
+            <NavLink to={"/myorders"}><FaFirstOrderAlt />My Orders</NavLink>
+           </li>
           </ul>
         </div>
-        <div className="flex items-center space-x-1">
-            <img className="h-10 w-auto md:h-12 lg:h-14" src={logo} alt={logo} />
-            <h2 className="text-xl font-bold ">PawMart</h2>
+        <div>
+          <Link to={"/"} className="flex items-center gap-1 text-[14px] lg:text-xl md:text-xl font-bold">
+            <img className="w-8 md:w-12 lg:w-14" src={logo} alt="PawMart Logo" />
+            <span>PawMart</span>
+        </Link>
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-         {links}
+      <div className="navbar-center hidden md:flex">
+        <ul className="menu menu-horizontal px-1 gap-2">
+           <li className="md:text-[11px] lg:text-[14px]"> 
+            <NavLink to={"/"}> <FaHome />Home</NavLink>
+          </li>
+          <li className="md:text-[11px] lg:text-[14px]">
+            <NavLink to={"/allpetsupplies"}><MdPets />Pets &amp; Supplies</NavLink>
+          </li>
+            <li className="md:text-[11px] lg:text-[14px]">
+            <NavLink to={"/addlisting"}><FaEarListen />Add Listing</NavLink>
+           </li>
+            <li className="md:text-[11px] lg:text-[14px]">
+            <NavLink to={"/mylistings"}><GiLoveMystery />My Listings</NavLink>
+           </li>
+            <li className="md:text-[11px] lg:text-[14px]">
+            <NavLink to={"/myorders"}><FaFirstOrderAlt />My Orders</NavLink>
+           </li>
+          
         </ul>
       </div>
-      <div className="navbar-end ">
-        <a className="btn bg-primary text-white">Button</a>
+      <div className="navbar-end gap-3">
+        {user ? (
+          <div className="dropdown dropdown-end z-50">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-9 border-2 border-gray-300 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  referrerPolicy="no-referrer"
+                  src={
+                    user?.photoURL ||
+                    "https://cdn-icons-png.flaticon.com/512/847/847969.png"
+                  }
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex="-1"
+              className="menu opacity-100  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+            >
+              <div className=" pb-3 border-b border-b-gray-200">
+                <li className="text-sm font-bold">{user.displayName}</li>
+                <li className="text-xs">{user.email}</li>
+              </div>
+              <li className="mt-3">
+                <Link to={"/profile"}>
+                  <FaUser /> Profile
+                </Link>
+              </li>
+
+              
+              <li>
+                <Link to={"/my-downloads"}>My Downloads</Link>
+              </li>
+
+              
+
+              <li>
+                <a>
+                  {" "}
+                  <FaGear /> Settings
+                </a>
+              </li>
+              <li>
+                <button
+                  onClick={signOutUser}
+                  className="btn btn-xs text-left bg-primary text-white"
+                >
+                  <IoLogOut /> Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <Link
+            to={"/auth/login"}
+            className="btn rounded-full md:text-[10px] md:p-2  lg:text-[16px] lg:p-6 border-gray-300  btn-sm bg-primary text-white"
+          >
+            {" "}
+            <IoLogIn /> Login
+          </Link>
+            <Link
+            to={"/auth/register"}
+            className="btn rounded-full md:text-[10px] md:p-2  lg:text-[16px] lg:p-6 border-gray-300  btn-sm bg-primary text-white"
+          >
+            {" "}
+            <FaCashRegister /> Register
+          </Link>
+        
+          </div>
+        )}
       </div>
     </div>
   );
