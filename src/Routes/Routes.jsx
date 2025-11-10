@@ -30,7 +30,8 @@ export const router = createBrowserRouter([
 
         {
             path:"/allpetsupplies",
-            element:<AllPetsSupplies></AllPetsSupplies>
+            element:<AllPetsSupplies></AllPetsSupplies>,
+            loader: () => fetch('http://localhost:3000/models')
 
         },
         {
