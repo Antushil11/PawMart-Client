@@ -13,7 +13,7 @@ const AllPetsSupplies = () => {
         Pets &amp; Supplies
       </div>
 
-      <div className="grid grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-11/12 mx-auto my-10 ">
         {data.map(model => <PetsSuppliesCard key={model._id} model={model}></PetsSuppliesCard>)}
 
 

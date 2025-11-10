@@ -10,6 +10,7 @@ import MyOrders from "../Pages/MyOrders/MyOrders";
 import PrivateRoute from "./PrivateRoute";
 import CategorySection from "../Pages/Category/CategorySection";
 import CategoryFilteredProduct from "../Pages/Category/CategoryFilteredProduct";
+import ListingDetails from "../Pages/ListingDetails/ListingDetails";
 
 
 
@@ -50,6 +51,12 @@ export const router = createBrowserRouter([
         {
           path:"/mylistings",
           element: <PrivateRoute> <MyListings></MyListings></PrivateRoute>
+        },
+        {
+          path:"listingdetails/:id",
+          element:<PrivateRoute> <ListingDetails></ListingDetails></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:3000/models/${params.id}`),
+
         },
         {
           path:"/myorders",

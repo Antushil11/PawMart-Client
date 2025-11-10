@@ -1,11 +1,52 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const AddListing = () => {
+
+  const {user} = use(AuthContext)
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      name: e.target.name.value,
+      category: e.target.category.value,
+      price: e.target.price.value,
+      location: e.target.location.value,
+      description: e.target.description.value,
+      image: e.target.image.value,
+      date: new Date(),
+      email: user.email,
+    }
+
+    fetch(`http://localhost:3000/models`,{
+      method: 'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data =>{
+      toast.success("Successfully added!")
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+    
+  };
   return (
     <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">  Add New Listing</h2>
-        <form className="space-y-4">
+        <h2 className="text-2xl font-bold text-center mb-6">
+          {" "}
+          Add New Listing
+        </h2>
+        <form  onSubmit={handleSubmit} className="space-y-4">
           {/* Name Field */}
           <div>
             <label className="label font-medium">Pet Name</label>
@@ -37,28 +78,28 @@ const AddListing = () => {
             </select>
           </div>
 
-          {/* bid amount */}
+          {/* price */}
           <div>
             <label className="label font-medium">price</label>
             <input
               type="text"
-              name="price_max"
+              name="price"
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Max price"
             />
           </div>
 
-           {/* Location */}
-        <div>
-          <label className="label font-medium">Location</label>
-          <input
-            type="text"
-            name="location"
-            required
-            className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-            placeholder="Enter location"
-          />
-        </div>
+          {/* Location */}
+          <div>
+            <label className="label font-medium">Location</label>
+            <input
+              type="text"
+              name="location"
+              required
+              className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
+              placeholder="Enter location"
+            />
+          </div>
 
           {/* Description Textarea */}
           <div>
@@ -72,47 +113,48 @@ const AddListing = () => {
             ></textarea>
           </div>
 
-           {/* Image URL */}
+          {/* Image URL */}
           <div>
             <label className="label font-medium">Image (URL)</label>
             <input
               type="url"
-              name="thumbnail"
+              name="image"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Image (URL)"
             />
           </div>
-          
-        {/* Date */}
-        <div>
-          <label className="block text-gray-700 mb-1">Date </label>
-          <input
-            type="date"
-            name="date"
-            required           
-            className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-          />
-        </div>
 
-        {/* Email */}
-        <div>
-          <label className="block text-gray-700 mb-1">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-          />
-        </div>
+          {/* Date */}
+          <div>
+            <label className="block text-gray-700 mb-1">Date </label>
+            <input
+              type="date"
+              name="date"
+              required
+              className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
+            />
+          </div>
 
+         
+          {/* Email */}
+          <div>
+            <label className="label font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              readOnly
+              value={user?.email || ""}
+              className="input w-full rounded-full focus:outline-gray-200 bg-gray-100"
+            />
+          </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             className="btn w-full rounded-xl md:text-[14px] md:p-4  lg:text-[16px] lg:p-6 border-gray-300  btn-sm bg-primary text-white"
           >
-              Add Listing
+            Add Listing
           </button>
         </form>
       </div>
