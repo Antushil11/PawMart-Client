@@ -4,7 +4,7 @@ import CategorySection from '../../Pages/Category/CategorySection';
 import RecentListings from '../../Pages/RecentListings/RecentListings';
 
 
-const recentListtingPromise = fetch('http://localhost:3000/latest-products').then(res => res.json())
+const recentListtingPromise = fetch('http://localhost:3000/latest-models').then(res => res.json())
 
 
 
