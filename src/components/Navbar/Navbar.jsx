@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, Links, NavLink } from "react-router";
 import { IoAddCircle, IoLogIn, IoLogOut } from "react-icons/io5";
@@ -10,6 +10,22 @@ import { GiLoveMystery } from "react-icons/gi";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
+
+
 
 
   return (
@@ -108,7 +124,7 @@ const Navbar = () => {
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs">{user.email}</li>
               </div>
-              <li className="mt-3">
+              <li className="mt-3 mb-2">
                 <Link to={"/profile"}>
                   <FaUser /> Profile
                 </Link>
@@ -121,10 +137,16 @@ const Navbar = () => {
                   <FaGear /> Settings
                 </a>
               </li> */}
+
+               <input
+           onChange={(e) => handleTheme(e.target.checked)}
+           type="checkbox"
+           defaultChecked={localStorage.getItem('theme') === "dark"}
+           className="toggle"/>
               <li>
                 <button
                   onClick={signOutUser}
-                  className="btn w-full rounded-xl mt-2 md:text-[10px] md:p-2  lg:text-[14px] lg:p-4 border-gray-300  btn-sm bg-primary text-white"
+                  className="btn mt-2 w-full rounded-xl md:text-[10px] md:p-2  lg:text-[12px] lg:p-4 border-gray-300  btn-sm bg-primary text-white"
                 >
                   <IoLogOut /> Logout
                 </button>
