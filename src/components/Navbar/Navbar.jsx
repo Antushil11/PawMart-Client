@@ -113,20 +113,14 @@ const Navbar = () => {
                   <FaUser /> Profile
                 </Link>
               </li>
-
-              
-              <li>
-                <Link to={"/my-downloads"}>My Downloads</Link>
-              </li>
-
               
 
-              <li>
+              {/* <li>
                 <a>
                   {" "}
                   <FaGear /> Settings
                 </a>
-              </li>
+              </li> */}
               <li>
                 <button
                   onClick={signOutUser}
