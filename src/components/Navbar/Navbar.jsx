@@ -56,14 +56,14 @@ const Navbar = () => {
         </div>
         <div>
           <Link to={"/"} className="flex items-center gap-1 text-[14px] lg:text-xl md:text-xl font-bold">
-            <img className="w-8 md:w-12 lg:w-14" src={logo} alt="PawMart Logo" />
+            <img className="w-8 md:w-12  lg:w-14" src={logo} alt="PawMart Logo" />
             <span>PawMart</span>
         </Link>
         </div>
       </div>
       <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1 gap-2">
-           <li className="md:text-[11px] lg:text-[14px]"> 
+        <ul className="menu menu-horizontal px-1 gap-2 sm:ml-16">
+           <li className="md:text-[11px]  lg:text-[14px]"> 
             <NavLink to={"/"}> <FaHome />Home</NavLink>
           </li>
           <li className="md:text-[11px] lg:text-[14px]">
