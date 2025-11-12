@@ -18,6 +18,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    hydrateFallbackElement: <span className="loading loading-spinner loading-lg"></span>,
     children: [
       {
         index: true,
