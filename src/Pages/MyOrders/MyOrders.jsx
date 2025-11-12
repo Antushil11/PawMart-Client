@@ -6,23 +6,21 @@ import autoTable from "jspdf-autotable";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false); // added loading state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!user?.email) return;
-
-    setLoading(true); // start loading
+    setLoading(true);
     fetch(`http://localhost:3000/bids?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setOrders(data))
       .catch(() => setOrders([]))
-      .finally(() => setLoading(false)); // stop loading
+      .finally(() => setLoading(false));
   }, [user]);
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     doc.text("My Orders Report", 14, 10);
-
     autoTable(doc, {
       head: [["Product Name", "Buyer", "Price", "Qty", "Address", "Date", "Phone"]],
       body: orders.map((order) => [
@@ -36,20 +34,21 @@ const MyOrders = () => {
       ]),
       startY: 20,
     });
-
     doc.save("MyOrdersReport.pdf");
   };
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">My Orders</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">My Orders</h1>
 
-      {loading ? ( // show loading while fetching
-        <div className="text-center py-6">Loading orders...</div>
+      {loading ? (
+        <div className="flex justify-center items-center h-40">
+          <span className="loading loading-spinner loading-lg text-primary"></span>
+        </div>
       ) : (
-        <div className="overflow-x-auto border rounded-lg">
+        <div className="overflow-x-auto border rounded-lg shadow-md">
           <table className="table w-full">
-            <thead>
+            <thead className="bg-base-200 text-base font-semibold">
               <tr>
                 <th>Product Name</th>
                 <th>Buyer</th>
@@ -62,8 +61,8 @@ const MyOrders = () => {
             </thead>
             <tbody>
               {orders.length > 0 ? (
-                orders.map((order, i) => (
-                  <tr key={i}>
+                orders.map((order) => (
+                  <tr key={order._id}>
                     <td>{order.product_name}</td>
                     <td>{order.buyer_name}</td>
                     <td>{order.price}</td>
@@ -75,7 +74,7 @@ const MyOrders = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="text-center py-4">
+                  <td colSpan="7" className="text-center py-6">
                     No orders found.
                   </td>
                 </tr>
@@ -85,13 +84,15 @@ const MyOrders = () => {
         </div>
       )}
 
-      <button
-        onClick={handleDownloadPDF}
-        className="btn btn-primary mt-6 rounded-full"
-        disabled={loading || orders.length === 0} // disable button while loading or no orders
-      >
-        Download Report
-      </button>
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={handleDownloadPDF}
+          className="btn btn-primary btn-wide rounded-full"
+          disabled={loading || orders.length === 0}
+        >
+          Download Report
+        </button>
+      </div>
     </div>
   );
 };

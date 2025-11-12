@@ -124,7 +124,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={signOutUser}
-                  className="btn btn-xs text-left bg-primary text-white"
+                  className="btn w-full rounded-xl mt-2 md:text-[10px] md:p-2  lg:text-[14px] lg:p-4 border-gray-300  btn-sm bg-primary text-white"
                 >
                   <IoLogOut /> Logout
                 </button>
