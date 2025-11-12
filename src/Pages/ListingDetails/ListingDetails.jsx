@@ -1,10 +1,11 @@
 import React, { use, useRef } from "react";
 import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ListingDetails = () => {
   const data = useLoaderData();
-
 
   const bidModalRef = useRef(null);
 
@@ -21,53 +22,63 @@ const ListingDetails = () => {
   const handleBidsSubmit = (e) => {
     e.preventDefault();
 
-    
-      const name= user?.displayName || "Anonymous";
-       const email= user?.email;
-       const listingId= model?._id;
-       const listingName= model?.name;
-      const quantity= model?.category === "Pets" ? 1 : e.target.quantity.value;
-       const price= model?.price;
-      const address= e.target.address.value;
-      const date= e.target.date.value;
-      const phone= e.target.phone.value;
-      const notes= e.target.notes.value;
+    const name = user?.displayName || "Anonymous";
+    const email = user?.email;
+    const listingId = model?._id;
+    const listingName = model?.name;
+    const quantity = model?.category === "Pets" ? 1 : e.target.quantity.value;
+    const price = model?.price;
+    const address = e.target.address.value;
+    const date = e.target.date.value;
+    const phone = e.target.phone.value;
+    const notes = e.target.notes.value;
 
-
-      console.log(name,email,listingId,listingName,quantity, price,address, date, phone, notes)
-   
-
-    
+    console.log(
+      name,
+      email,
+      listingId,
+      listingName,
+      quantity,
+      price,
+      address,
+      date,
+      phone,
+      notes
+    );
 
     const newBid = {
-        product: model._id,
-        buyer_name: name,
-        email:email,       
-        product_id:listingId,
-        product_name:listingName,
-        price:price,
-        quantity:quantity,
-        address:address,
-        date:date,
-        phone:phone,
-        additional_notes:notes,
-        
+      product: model._id,
+      buyer_name: name,
+      email: email,
+      product_id: listingId,
+      product_name: listingName,
+      price: price,
+      quantity: quantity,
+      address: address,
+      date: date,
+      phone: phone,
+      additional_notes: notes,
+    };
 
-    }
-
-
-    fetch('http://localhost:3000/bids',{
-        method:'POST',
-        headers:{
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(newBid)
+    fetch("http://localhost:3000/bids", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newBid),
     })
-    .then(res => res.json())
-    .then(data =>{
-        console.log('after a bids ',data)
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Order has been placed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
 
+        console.log("after a bids ", data);
+      });
   };
 
   return (
@@ -245,10 +256,7 @@ const ListingDetails = () => {
                       ></textarea>
                     </div>
 
-                    <button
-                      
-                      className="btn btn-primary w-full mt-4 rounded-full"
-                    >
+                    <button className="btn btn-primary w-full mt-4 rounded-full">
                       Confirm Order
                     </button>
                   </fieldset>

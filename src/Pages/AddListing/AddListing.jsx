@@ -3,67 +3,63 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 const AddListing = () => {
-
-  const {user} = use(AuthContext)
-  
+  const { user } = use(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const category = e.target.category.value;
 
     const formData = {
       name: e.target.name.value,
-      category: e.target.category.value,
-      price: e.target.price.value,
+      category,
+      price: category === "Pets" ? 0 : e.target.price.value,
       location: e.target.location.value,
       description: e.target.description.value,
       image: e.target.image.value,
-      date: new Date(),
+      date: e.target.date.value,
       email: user.email,
-    }
+    };
 
-    fetch(`http://localhost:3000/models`,{
-      method: 'POST',
-      headers:{
-        'Content-Type':'application/json',
+    fetch(`http://localhost:3000/models`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     })
-    .then(res => res.json())
-    .then(data =>{
-      toast.success("Successfully added!")
-      console.log(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-    
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Successfully added!");
+        console.log(data);
+        e.target.reset();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   return (
     <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative">
         <h2 className="text-2xl font-bold text-center mb-6">
-          {" "}
           Add New Listing
         </h2>
-        <form  onSubmit={handleSubmit} className="space-y-4">
-          {/* Name Field */}
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="label font-medium">Pet Name</label>
+            <label className="label font-medium">Product / Pet Name</label>
             <input
               type="text"
               name="name"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Pet Name"
+              placeholder="Enter name"
             />
           </div>
 
-          {/* Category Dropdown */}
           <div>
             <label className="label font-medium">Category</label>
             <select
-              defaultValue={""}
+              defaultValue=""
               name="category"
               required
               className="select w-full rounded-full focus:border-0 focus:outline-gray-200"
@@ -71,25 +67,23 @@ const AddListing = () => {
               <option value="" disabled>
                 Select category
               </option>
-              <option value="Vehicles">Pets</option>
-              <option value="Plants">Accessories</option>
-              <option value="Foods">Foods</option>
-              <option value="Home & Living">Care Products</option>
+              <option value="Pets">Pets (Adoption)</option>
+              <option value="Food">Pet Food</option>
+              <option value="Accessories">Accessories</option>
+              <option value="Care Products">Care Products</option>
             </select>
           </div>
 
-          {/* price */}
           <div>
-            <label className="label font-medium">price</label>
+            <label className="label font-medium">Price</label>
             <input
-              type="text"
+              type="number"
               name="price"
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Max price"
+              placeholder="Enter price (auto 0 for pets)"
             />
           </div>
 
-          {/* Location */}
           <div>
             <label className="label font-medium">Location</label>
             <input
@@ -101,7 +95,6 @@ const AddListing = () => {
             />
           </div>
 
-          {/* Description Textarea */}
           <div>
             <label className="label font-medium">Description</label>
             <textarea
@@ -113,7 +106,6 @@ const AddListing = () => {
             ></textarea>
           </div>
 
-          {/* Image URL */}
           <div>
             <label className="label font-medium">Image (URL)</label>
             <input
@@ -121,13 +113,12 @@ const AddListing = () => {
               name="image"
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Image (URL)"
+              placeholder="Enter image URL"
             />
           </div>
 
-          {/* Date */}
           <div>
-            <label className="block text-gray-700 mb-1">Date </label>
+            <label className="label font-medium">Date (Pick Up)</label>
             <input
               type="date"
               name="date"
@@ -136,8 +127,6 @@ const AddListing = () => {
             />
           </div>
 
-         
-          {/* Email */}
           <div>
             <label className="label font-medium">Email</label>
             <input
@@ -149,10 +138,9 @@ const AddListing = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
-            className="btn w-full rounded-xl md:text-[14px] md:p-4  lg:text-[16px] lg:p-6 border-gray-300  btn-sm bg-primary text-white"
+            className="btn w-full rounded-xl md:text-[14px] md:p-4 lg:text-[16px] lg:p-6 border-gray-300 btn-sm bg-primary text-white"
           >
             Add Listing
           </button>
