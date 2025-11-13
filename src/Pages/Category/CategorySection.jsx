@@ -36,7 +36,7 @@ const CategorySection = () => {
           <div
             key={cat.name}
             onClick={() => navigate(`/category-filtered-product/${cat.route}`)}
-            className="cursor-pointer bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-lg hover:scale-105 transition-transform"
+            className="cursor-pointer bg-[#F8F1E8] shadow-md rounded-2xl overflow-hidden hover:shadow-lg hover:scale-105 transition-transform"
           >
             <img src={cat.image} alt={cat.name} className="w-full h-80 object-cover" />
             <div className="p-4 text-center">

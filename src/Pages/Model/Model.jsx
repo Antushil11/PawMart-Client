@@ -7,7 +7,7 @@ const Model = ({model}) => {
   console.log(model);
   return (
     <div>
-      <div className="bg-white shadow-md hover:scale-105 mt-10 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300">
+      <div className="bg-[#F8F1E8] shadow-md hover:scale-105 mt-10 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300">
         <img src={image} alt={name} className="w-full h-48 object-cover" />
 
         <div className="p-4 space-y-2">

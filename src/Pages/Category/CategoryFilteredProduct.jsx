@@ -179,7 +179,7 @@ const CategoryFilteredProduct = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-transform hover:scale-105"
+              className="bg-[#F8F1E8] shadow-md rounded-xl overflow-hidden hover:shadow-lg transition-transform hover:scale-105"
             >
               <img
                 src={product.image}
