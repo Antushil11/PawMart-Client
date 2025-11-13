@@ -78,7 +78,7 @@ const MyListings = () => {
           <span className="loading loading-spinner loading-lg text-primary"></span>
         </div>
       ) : (
-        <div className="overflow-x-auto border rounded-lg shadow-md bg-base-100">
+        <div className="overflow-x-auto border rounded-lg shadow-md bg-[#F8F1E8] ">
           <table className="table w-full">
             <thead className="bg-base-200 text-base font-semibold">
               <tr>

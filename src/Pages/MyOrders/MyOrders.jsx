@@ -42,11 +42,11 @@ const MyOrders = () => {
       <h1 className="text-3xl font-bold mb-6 text-center">My Orders</h1>
 
       {loading ? (
-        <div className="flex justify-center items-center h-40">
+        <div className="flex justify-center items-center h-40 ">
           <span className="loading loading-spinner loading-lg text-primary"></span>
         </div>
       ) : (
-        <div className="overflow-x-auto border rounded-lg shadow-md">
+        <div className="overflow-x-auto border rounded-lg shadow-md bg-[#F8F1E8]">
           <table className="table w-full">
             <thead className="bg-base-200 text-base font-semibold">
               <tr>
