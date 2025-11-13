@@ -131,13 +131,14 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-3">
-        {user ? (
-          <div className="flex items-center lg:gap-4   ">
-            <input
+          <input
            onChange={(e) => handleTheme(e.target.checked)}
            type="checkbox"
            defaultChecked={localStorage.getItem('theme') === "dark"}
            className="toggle"/>
+        {user ? (
+          <div className="flex items-center lg:gap-4   ">
+          
             <div className="dropdown dropdown-end z-50">
               <div
                 tabIndex={0}
@@ -166,7 +167,7 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <div className="flex gap-2">
+          <div className="flex lg:gap-2">
             <Link
               to={"/auth/login"}
               className="btn rounded-full md:text-[10px] md:p-2  lg:text-[16px] lg:p-6 border-gray-300  btn-sm bg-primary text-white"
