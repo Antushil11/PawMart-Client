@@ -8,7 +8,7 @@ const WhyAdopt = () => {
       <p className="max-w-3xl mx-auto text-gray-600 mb-10">
         Every adoption gives a pet a second chance at happiness. By choosing to adopt,
         you’re not only saving a life but also helping reduce pet homelessness and supporting
-        a caring community
+        a caring community .
       </p>
 
       <div className="grid md:grid-cols-3  gap-6 w-11/12 mx-auto">
