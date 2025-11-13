@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import PetsSuppliesCard from "./PetsSuppliesCard";
 
 const AllPetsSupplies = () => {
   const data = useLoaderData();
-  console.log(data);
+  const [models, setModels] = useState(data)
+  const [loading, setLoading] = useState(false)
 
   const handleSearch = (e) =>{
     e.preventDefault()
     const search_text = e.target.search.value
     console.log(search_text)
+    setLoading(true)
 
+    fetch(`http://localhost:3000/search?search=${search_text}`)
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data)
+      setModels(data)
+      setLoading(false)
+    })
+
+  }
+
+
+  if(loading) {
+    return <div className="text-center mt-10"><span className="loading loading-spinner loading-lg"></span></div>
   }
   return (
     <div>
@@ -36,13 +51,13 @@ const AllPetsSupplies = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input name="search" type="search" required placeholder="Search" />
+          <input name="search" type="search"  placeholder="Search" />
         </label>
-        <button className="btn btn-primary rounded-full">Search</button>
+        <button className="btn btn-primary rounded-full">{loading? "Searching..." : "Search"}</button>
       </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-11/12 mx-auto my-10 ">
-        {data.map((model) => (
+        {models.map((model) => (
           <PetsSuppliesCard key={model._id} model={model}></PetsSuppliesCard>
         ))}
       </div>
