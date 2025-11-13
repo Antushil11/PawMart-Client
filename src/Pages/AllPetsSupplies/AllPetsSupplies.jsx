@@ -24,6 +24,9 @@ const AllPetsSupplies = () => {
   }
 
 
+  
+
+
   if(loading) {
     return <div className="text-center mt-10"><span className="loading loading-spinner loading-lg"></span></div>
   }
@@ -55,6 +58,8 @@ const AllPetsSupplies = () => {
         </label>
         <button className="btn btn-primary rounded-full">{loading? "Searching..." : "Search"}</button>
       </form>
+
+      
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-11/12 mx-auto my-10 ">
         {models.map((model) => (

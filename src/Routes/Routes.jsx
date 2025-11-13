@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
         path: "/mylistings",
         element: (
           <PrivateRoute>
-            {" "}
+          
             <MyListings></MyListings>
           </PrivateRoute>
         ),
@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
         path: "listingdetails/:id",
         element: (
           <PrivateRoute>
-            {" "}
+            
             <ListingDetails></ListingDetails>
           </PrivateRoute>
         ),

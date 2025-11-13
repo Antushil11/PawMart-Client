@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef, } from "react";
+import React, { use,  useRef, } from "react";
 import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,16 +12,16 @@ const ListingDetails = () => {
   const { user } = use(AuthContext);
   const model = data.result;
 
-  const productId = model?._id;
+  // const productId = model?._id;
 
 
-  useEffect(() =>{
-    fetch(`http://localhost:3000/models/bids/${productId}`)
-    .then(res => res.json())
-    .then(data =>{
-      console.log('bids for this product ',data)
-    })
-  },[productId])
+  // useEffect(() =>{
+  //   fetch(`http://localhost:3000/models/bids/${productId}`)
+  //   .then(res => res.json())
+  //   .then(data =>{
+  //     console.log('bids for this product ',data)
+  //   })
+  // },[productId])
 
   const handleBidModalOpen = () => {
     bidModalRef.current.showModal();
@@ -90,7 +90,7 @@ const ListingDetails = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8 ">
+    <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
       <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden">
         <div className="flex flex-col md:flex-row gap-8 p-6 md:p-8">
           <div className="shrink-0 w-full md:w-1/2">
@@ -102,14 +102,20 @@ const ListingDetails = () => {
           </div>
 
           <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
-            <h1 className="text-3xl md:text-4xl font-bold ">{model.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold ">Name: {model.name}</h1>
 
-            <div className="flex gap-3">
-              <p className="text-sm ">
+            <div className="flex  gap-3">
+              <p className="text-base md:text-lg">
                 Category: <span className="font-medium">{model.category}</span>
               </p>
             </div>
-            <p className="text-base font-semibold ">{`$ ${model.price}`}</p>
+            <p className="leading-relaxed  text-base md:text-lg">
+               Email: <span>{model.email}</span>
+            </p>
+            <p className="leading-relaxed text-base md:text-lg">
+              Location: {model.location}
+            </p>
+            <p className="text-base font-semibold ">Price: {`$ ${model.price}`}</p>
 
             <p className="leading-relaxed text-base md:text-lg">
               {model.description}
@@ -125,7 +131,7 @@ const ListingDetails = () => {
             </div>
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button onClick={handleBidModalOpen} className="btn ">
+            <button onClick={handleBidModalOpen} className="btn btn-primary">
               Order Now
             </button>
             <dialog

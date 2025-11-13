@@ -23,7 +23,7 @@ const heroes = [
 
 const PetHeroes = () => {
   return (
-    <section className="py-14 bg-white text-center">
+    <section className="py-14 b text-center">
       <h2 className="text-3xl font-bold text-primary mb-6">Meet Our Pet Heroes</h2>
       <p className="text-gray-600 mb-10 max-w-3xl mx-auto">
         These amazing individuals have opened their hearts and homes to pets in need.
