@@ -6,7 +6,7 @@ import Footer from '../components/Footer/Footer';
 
 const MainLayout = () => {
     return (
-        <div className='text-primary bg-[#F8F1E8] '>
+        <div className='text-primary  '>
 
             <header className='bg-[#D9BFA2] max-w-full '>
                     <Navbar></Navbar>
