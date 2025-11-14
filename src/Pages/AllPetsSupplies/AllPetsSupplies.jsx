@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { useLoaderData } from "react-router";
+import React, {  useState } from "react";
+import { useLoaderData,} from "react-router";
 import PetsSuppliesCard from "./PetsSuppliesCard";
+import { AuthContext } from "../../context/AuthContext";
 
 const AllPetsSupplies = () => {
   const data = useLoaderData();
   const [models, setModels] = useState(data)
   const [loading, setLoading] = useState(false)
+
+
+
+
+
+
+
+
+
 
   const handleSearch = (e) =>{
     e.preventDefault()

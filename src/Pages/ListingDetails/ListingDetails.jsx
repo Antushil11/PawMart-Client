@@ -12,6 +12,8 @@ const ListingDetails = () => {
   const { user } = use(AuthContext);
   const model = data.result;
 
+  
+
   // const productId = model?._id;
 
 
@@ -77,6 +79,7 @@ const ListingDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        bidModalRef.current.close()
         Swal.fire({
           position: "top-end",
           icon: "success",

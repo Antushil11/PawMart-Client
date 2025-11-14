@@ -11,6 +11,48 @@ import { GiLoveMystery } from "react-icons/gi";
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
+
+  const link = <>
+   <li className="md:text-[10px] md:p-2  lg:text-[16px] lg:p-6">
+              <NavLink to={"/"}>
+                {" "}
+                <FaHome />
+                Home
+              </NavLink>
+            </li>
+            <li className="md:text-[10px] md:p-2  lg:text-[16px] lg:p-6">
+              <NavLink to={"/allpetsupplies"}>
+                <MdPets />
+                Pets &amp; Supplies
+              </NavLink>
+            </li>
+            {
+              user && <><li className="md:text-[10px] md:p-2  lg:text-[16px] lg:p-6">
+              <NavLink to={"/addlisting"}>
+                <FaEarListen />
+                Add Listing
+              </NavLink>
+            </li>
+            <li className="md:text-[10px] md:p-2  lg:text-[16px] lg:p-6">
+              <NavLink to={"/mylistings"}>
+                <GiLoveMystery />
+                My Listings
+              </NavLink>
+            </li>
+            <li className="md:text-[10px] md:p-2  lg:text-[16px] lg:p-6">
+              <NavLink to={"/myorders"}>
+                <FaFirstOrderAlt />
+                My Orders
+              </NavLink>
+            </li>
+            
+            
+            </>
+            }
+  
+
+  </>
+
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -48,37 +90,7 @@ const Navbar = () => {
             tabIndex="-1"
             className="  menu   menu-sm dropdown-content bg-base-100 rounded-box z-1 mb-20  w-52 p-2 shadow"
           >
-            <li className="">
-              <NavLink to={"/"}>
-                {" "}
-                <FaHome />
-                Home
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink to={"/allpetsupplies"}>
-                <MdPets />
-                Pets &amp; Supplies
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={"/addlisting"}>
-                <FaEarListen />
-                Add Listing
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={"/mylistings"}>
-                <GiLoveMystery />
-                My Listings
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={"/myorders"}>
-                <FaFirstOrderAlt />
-                My Orders
-              </NavLink>
-            </li>
+           {link}
           </ul>
         </div>
         <div className="">
@@ -97,37 +109,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1  lg:gap-2 sm:ml-10">
-          <li className="md:text-[11px]  lg:text-[14px]">
-            <NavLink to={"/"}>
-              {" "}
-              <FaHome />
-              Home
-            </NavLink>
-          </li>
-          <li className="md:text-[11px] lg:text-[14px]">
-            <NavLink to={"/allpetsupplies"}>
-              <MdPets />
-              Pets &amp; Supplies
-            </NavLink>
-          </li>
-          <li className="md:text-[11px] lg:text-[14px]">
-            <NavLink to={"/addlisting"}>
-              <FaEarListen />
-              Add Listing
-            </NavLink>
-          </li>
-          <li className="md:text-[11px] lg:text-[14px]">
-            <NavLink to={"/mylistings"}>
-              <GiLoveMystery />
-              My Listings
-            </NavLink>
-          </li>
-          <li className="md:text-[11px] lg:text-[14px]">
-            <NavLink to={"/myorders"}>
-              <FaFirstOrderAlt />
-              My Orders
-            </NavLink>
-          </li>
+         {link}
         </ul>
       </div>
       <div className="navbar-end gap-3">

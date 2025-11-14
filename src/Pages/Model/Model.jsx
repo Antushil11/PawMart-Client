@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 const Model = ({model}) => {
   const { name, image, category, location, price, _id } = model;
-  console.log(model);
+  
   return (
     <div>
       <div className="bg-[#F8F1E8] shadow-md hover:scale-105 mt-10 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300">

@@ -11,8 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 import CategorySection from "../Pages/Category/CategorySection";
 import CategoryFilteredProduct from "../Pages/Category/CategoryFilteredProduct";
 import ListingDetails from "../Pages/ListingDetails/ListingDetails";
-import Profile from "../Pages/Profile/Profile";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+
 
 export const router = createBrowserRouter([
   {
@@ -80,10 +80,7 @@ export const router = createBrowserRouter([
         path: "/category-filtered-product/:categoryName",
         element: <CategoryFilteredProduct></CategoryFilteredProduct>,
       },
-      {
-        path: "/profile",
-        element: <Profile></Profile>,
-      },
+      
     ],
   },
   {
