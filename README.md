@@ -21,7 +21,7 @@ Each listing includes a dedicated detail page with all product information and a
 ❌ Clean Error Handling
 Custom 404 page for invalid routes.
 
-live site URL : https://shiny-cascaron-1b2612.netlify.app/
+A live site URL : https://shiny-cascaron-1b2612.netlify.app/
 
 
 
