@@ -11,10 +11,10 @@ const MyOrders = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:3000/bids?email=${user.email}`,{
-      headers:{
-        authorization: `Bearer ${user.accessToken}`
-      }
+    fetch(`https://pawmartserver-lemon.vercel.app/bids?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setOrders(data))
@@ -26,7 +26,9 @@ const MyOrders = () => {
     const doc = new jsPDF();
     doc.text("My Orders Report", 14, 10);
     autoTable(doc, {
-      head: [["Product Name", "Buyer", "Price", "Qty", "Address", "Date", "Phone"]],
+      head: [
+        ["Product Name", "Buyer", "Price", "Qty", "Address", "Date", "Phone"],
+      ],
       body: orders.map((order) => [
         order.product_name,
         order.buyer_name,

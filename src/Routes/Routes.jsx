@@ -13,12 +13,13 @@ import CategoryFilteredProduct from "../Pages/Category/CategoryFilteredProduct";
 import ListingDetails from "../Pages/ListingDetails/ListingDetails";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
-
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    hydrateFallbackElement: <span className="loading loading-spinner loading-lg"></span>,
+    hydrateFallbackElement: (
+      <span className="loading loading-spinner loading-lg"></span>
+    ),
     children: [
       {
         index: true,
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
       {
         path: "/allpetsupplies",
         element: <AllPetsSupplies></AllPetsSupplies>,
-        loader: () => fetch("http://localhost:3000/models"),
+        loader: () => fetch("https://pawmartserver-lemon.vercel.app/models"),
       },
       {
         path: "/auth/login",
@@ -50,7 +51,6 @@ export const router = createBrowserRouter([
         path: "/mylistings",
         element: (
           <PrivateRoute>
-          
             <MyListings></MyListings>
           </PrivateRoute>
         ),
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
       {
         path: "listingdetails/:id",
         element: (
-          <PrivateRoute>            
+          <PrivateRoute>
             <ListingDetails></ListingDetails>
           </PrivateRoute>
         ),
@@ -77,7 +77,6 @@ export const router = createBrowserRouter([
         path: "/category-filtered-product/:categoryName",
         element: <CategoryFilteredProduct></CategoryFilteredProduct>,
       },
-      
     ],
   },
   {

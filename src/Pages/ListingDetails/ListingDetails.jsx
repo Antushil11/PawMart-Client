@@ -1,43 +1,31 @@
-import React, { use,  useEffect,  useRef, useState, } from "react";
-import { Link,  useParams } from "react-router";
+import React, { use, useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 import Swal from "sweetalert2";
 
 const ListingDetails = () => {
-
-  const {id} = useParams()
-  const [model, setmModel] = useState([])
-  const [loading, setLoading] = useState(true)
+  const { id } = useParams();
+  const [model, setmModel] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-  
 
-     useEffect(() =>{
-
-      fetch(`http://localhost:3000/models/${id}`,{
-      headers:{
-        authorization: `Bearer ${user.accessToken}`
-      }
+  useEffect(() => {
+    fetch(`https://pawmartserver-lemon.vercel.app/models/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
     })
-    .then(res => res.json())
-    .then(data => {
-      setmModel(data.result)
-      setLoading(false)
-    })
-  },[id,user])
-
+      .then((res) => res.json())
+      .then((data) => {
+        setmModel(data.result);
+        setLoading(false);
+      });
+  }, [id, user]);
 
   const bidModalRef = useRef(null);
-  
-
-  
-
-  
 
   // const productId = model?._id;
-
-
-
 
   const handleBidModalOpen = () => {
     bidModalRef.current.showModal();
@@ -84,7 +72,7 @@ const ListingDetails = () => {
       additional_notes: notes,
     };
 
-    fetch("http://localhost:3000/bids", {
+    fetch("https://pawmartserver-lemon.vercel.app/bids", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -93,7 +81,7 @@ const ListingDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        bidModalRef.current.close()
+        bidModalRef.current.close();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -106,8 +94,8 @@ const ListingDetails = () => {
       });
   };
 
-  if(loading){
-    return <div>Loading .............</div>
+  if (loading) {
+    return <div>Loading .............</div>;
   }
 
   return (
@@ -123,7 +111,9 @@ const ListingDetails = () => {
           </div>
 
           <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
-            <h1 className="text-3xl md:text-4xl font-bold ">Name: {model.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold ">
+              Name: {model.name}
+            </h1>
 
             <div className="flex  gap-3">
               <p className="text-base md:text-lg">
@@ -131,12 +121,14 @@ const ListingDetails = () => {
               </p>
             </div>
             <p className="leading-relaxed  text-base md:text-lg">
-               Email: <span>{model.email}</span>
+              Email: <span>{model.email}</span>
             </p>
             <p className="leading-relaxed text-base md:text-lg">
               Location: {model.location}
             </p>
-            <p className="text-base font-semibold ">Price: {`$ ${model.price}`}</p>
+            <p className="text-base font-semibold ">
+              Price: {`$ ${model.price}`}
+            </p>
 
             <p className="leading-relaxed text-base md:text-lg">
               {model.description}

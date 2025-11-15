@@ -20,7 +20,7 @@ const AddListing = () => {
       email: user.email,
     };
 
-    fetch(`http://localhost:3000/models`, {
+    fetch(`https://pawmartserver-lemon.vercel.app/models`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,9 +41,7 @@ const AddListing = () => {
   return (
     <div className="card border mt-10 border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
       <div className="card-body p-6 relative bg-[#F8F1E8]">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Add New Listing
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Add New Listing</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="label font-medium">Product / Pet Name</label>

@@ -13,7 +13,7 @@ const MyListings = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`http://localhost:3000/models?email=${user.email}`)
+    fetch(`https://pawmartserver-lemon.vercel.app/models?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setListings(data))
       .catch(() => setListings([]))
@@ -31,7 +31,9 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/models/${id}`, { method: "DELETE" })
+        fetch(`https://pawmartserver-lemon.vercel.app/models/${id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then(() => {
             Swal.fire("Deleted!", "Your listing has been deleted.", "success");
@@ -50,11 +52,14 @@ const MyListings = () => {
 
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/models/${selectedListing._id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: updatedName, price: updatedPrice }),
-    })
+    fetch(
+      `https://pawmartserver-lemon.vercel.app/models/${selectedListing._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: updatedName, price: updatedPrice }),
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         setListings(
@@ -71,7 +76,9 @@ const MyListings = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-primary text-center">My Listings</h1>
+      <h1 className="text-3xl font-bold mb-6 text-primary text-center">
+        My Listings
+      </h1>
 
       {loading ? (
         <div className="flex justify-center items-center h-48">
@@ -129,7 +136,9 @@ const MyListings = () => {
 
       <dialog id="update_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box bg-base-100">
-          <h3 className="font-bold text-lg mb-4 text-primary">Update Listing</h3>
+          <h3 className="font-bold text-lg mb-4 text-primary">
+            Update Listing
+          </h3>
           <form onSubmit={handleUpdateSubmit} className="space-y-4">
             <div className="form-control">
               <label className="label font-semibold">Name</label>
