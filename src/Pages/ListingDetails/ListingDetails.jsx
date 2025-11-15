@@ -1,29 +1,43 @@
-import React, { use,  useRef, } from "react";
-import { Link, useLoaderData } from "react-router";
+import React, { use,  useEffect,  useRef, useState, } from "react";
+import { Link,  useParams } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 import Swal from "sweetalert2";
 
 const ListingDetails = () => {
-  const data = useLoaderData();
+
+  const {id} = useParams()
+  const [model, setmModel] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { user } = use(AuthContext);
+  
+
+     useEffect(() =>{
+
+      fetch(`http://localhost:3000/models/${id}`,{
+      headers:{
+        authorization: `Bearer ${user.accessToken}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      setmModel(data.result)
+      setLoading(false)
+    })
+  },[id,user])
+
+
   const bidModalRef = useRef(null);
   
 
-  const { user } = use(AuthContext);
-  const model = data.result;
+  
 
   
 
   // const productId = model?._id;
 
 
-  // useEffect(() =>{
-  //   fetch(`http://localhost:3000/models/bids/${productId}`)
-  //   .then(res => res.json())
-  //   .then(data =>{
-  //     console.log('bids for this product ',data)
-  //   })
-  // },[productId])
+
 
   const handleBidModalOpen = () => {
     bidModalRef.current.showModal();
@@ -91,6 +105,10 @@ const ListingDetails = () => {
         console.log("after a bids ", data);
       });
   };
+
+  if(loading){
+    return <div>Loading .............</div>
+  }
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">

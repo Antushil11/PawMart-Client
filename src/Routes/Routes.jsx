@@ -58,13 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "listingdetails/:id",
         element: (
-          <PrivateRoute>
-            
+          <PrivateRoute>            
             <ListingDetails></ListingDetails>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/models/${params.id}`),
       },
       {
         path: "/myorders",
