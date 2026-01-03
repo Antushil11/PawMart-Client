@@ -82,7 +82,7 @@ const Footer = () => {
             </button>
           </div>
 
-          <a className="link link-hover text-primary gap-2 flex">
+          <a href="https://web.whatsapp.com/" className="link link-hover text-primary gap-2 flex">
             <IoCallOutline size={16} />
             +1 (555) 123-4567
           </a>

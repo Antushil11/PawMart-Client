@@ -11,7 +11,9 @@ const recentListtingPromise = fetch(
 const Home = () => {
   return (
     <div className="">
-      <Banner></Banner>
+      <div className="mt-20">
+        <Banner></Banner>
+      </div>
       <CategorySection></CategorySection>
       <RecentListings
         recentListtingPromise={recentListtingPromise}

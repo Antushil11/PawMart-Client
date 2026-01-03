@@ -169,7 +169,7 @@ const CategoryFilteredProduct = () => {
   }, [categoryName]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className=" mx-auto px-4 py-10  mt-20">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Showing : {categoryName.replace("-", " ")}
       </h2>
@@ -184,7 +184,7 @@ const CategoryFilteredProduct = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-56 object-cover"
+                className="w-full h-80 object-cover "
               />
               <div className="p-4 text-center">
                 <h3 className="font-semibold text-lg">{product.name}</h3>
