@@ -30,7 +30,7 @@ const PetHeroes = () => {
         Their kindness keeps PawMart’s mission alive.
       </p>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 w-11/12 mx-auto">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mx-auto">
         {heroes.map((hero, index) => (
           <div key={index} className="p-6 border rounded-2xl shadow-md bg-[#FFF8F3]">
             <img
