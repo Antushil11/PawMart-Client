@@ -12,11 +12,13 @@ import CategorySection from "../Pages/Category/CategorySection";
 import CategoryFilteredProduct from "../Pages/Category/CategoryFilteredProduct";
 import ListingDetails from "../Pages/ListingDetails/ListingDetails";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import { fallbackListings } from "../data/mockData";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <ErrorPage></ErrorPage>,
     hydrateFallbackElement: (
       <span className="loading loading-spinner loading-lg"></span>
     ),
@@ -29,7 +31,16 @@ export const router = createBrowserRouter([
       {
         path: "/allpetsupplies",
         element: <AllPetsSupplies></AllPetsSupplies>,
-        loader: () => fetch("https://pawmartserver-lemon.vercel.app/models"),
+        loader: async () => {
+          try {
+            const res = await fetch("https://pawmartserver-lemon.vercel.app/models");
+            if (!res.ok) return fallbackListings;
+            const data = await res.json();
+            return Array.isArray(data) && data.length > 0 ? data : fallbackListings;
+          } catch {
+            return fallbackListings;
+          }
+        },
       },
       {
         path: "/auth/login",

@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
-const CategoryFilteredProduct = () => {
-  const { categoryName } = useParams();
-  const [products, setProducts] = useState([]);
-
-  const allProducts = [
-    // 🐶 Pets (Adoption) — 6 Cards
-    {
-      id: 1,
-      name: "Golden Retriever Puppy",
-      category: "Pets",
-      image: "https://i.ibb.co/zVsbBhPg/Untitled-design-40.jpg",
-    },
+const allProducts = [
+  // 🐶 Pets (Adoption) — 6 Cards
+  {
+    id: 1,
+    name: "Golden Retriever Puppy",
+    category: "Pets",
+    image: "https://i.ibb.co/zVsbBhPg/Untitled-design-40.jpg",
+  },
     {
       id: 2,
       name: "Persian Cat",
@@ -160,6 +156,10 @@ const CategoryFilteredProduct = () => {
     },
     
   ];
+
+const CategoryFilteredProduct = () => {
+  const { categoryName } = useParams();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const filtered = allProducts.filter(

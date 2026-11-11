@@ -1,24 +1,38 @@
 import React, { use, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
+import { fallbackListings } from "../../data/mockData";
 
 import Swal from "sweetalert2";
 
 const ListingDetails = () => {
   const { id } = useParams();
-  const [model, setmModel] = useState([]);
+  const [model, setmModel] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
 
   useEffect(() => {
     fetch(`https://pawmartserver-lemon.vercel.app/models/${id}`, {
       headers: {
-        authorization: `Bearer ${user.accessToken}`,
+        authorization: `Bearer ${user?.accessToken}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load details");
+        return res.json();
+      })
       .then((data) => {
-        setmModel(data.result);
+        if (data?.result) {
+          setmModel(data.result);
+        } else {
+          const fallback = fallbackListings.find((item) => item._id === id);
+          setmModel(fallback || null);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        const fallback = fallbackListings.find((item) => item._id === id);
+        setmModel(fallback || null);
         setLoading(false);
       });
   }, [id, user]);
@@ -95,7 +109,22 @@ const ListingDetails = () => {
   };
 
   if (loading) {
-    return <div>Loading .............</div>;
+    return (
+      <div className="mt-20 text-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+  if (!model) {
+    return (
+      <div className="mt-20 text-center">
+        <h2 className="text-2xl font-bold">Listing not found</h2>
+        <Link to="/allpetsupplies" className="btn btn-primary mt-4">
+          Browse All Listings
+        </Link>
+      </div>
+    );
   }
 
   return (

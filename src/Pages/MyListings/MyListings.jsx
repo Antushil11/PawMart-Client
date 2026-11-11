@@ -14,8 +14,11 @@ const MyListings = () => {
     if (!user?.email) return;
     setLoading(true);
     fetch(`https://pawmartserver-lemon.vercel.app/models?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setListings(data))
+      .then((res) => {
+        if (!res.ok) return [];
+        return res.json();
+      })
+      .then((data) => setListings(Array.isArray(data) ? data : []))
       .catch(() => setListings([]))
       .finally(() => setLoading(false));
   }, [user]);

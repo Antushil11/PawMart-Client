@@ -13,11 +13,14 @@ const MyOrders = () => {
     setLoading(true);
     fetch(`https://pawmartserver-lemon.vercel.app/bids?email=${user.email}`, {
       headers: {
-        authorization: `Bearer ${user.accessToken}`,
+        authorization: `Bearer ${user?.accessToken}`,
       },
     })
-      .then((res) => res.json())
-      .then((data) => setOrders(data))
+      .then((res) => {
+        if (!res.ok) return [];
+        return res.json();
+      })
+      .then((data) => setOrders(Array.isArray(data) ? data : []))
       .catch(() => setOrders([]))
       .finally(() => setLoading(false));
   }, [user]);

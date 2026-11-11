@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const AllPetsSupplies = () => {
   const data = useLoaderData();
-  const [models, setModels] = useState(data);
+  const [models, setModels] = useState(Array.isArray(data) ? data : []);
   const [loading, setLoading] = useState(false);
 
   const handleSearch = (e) => {
@@ -15,10 +15,17 @@ const AllPetsSupplies = () => {
     setLoading(true);
 
     fetch(`https://pawmartserver-lemon.vercel.app/search?search=${search_text}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) return [];
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
-        setModels(data);
+        setModels(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch(() => {
+        setModels([]);
         setLoading(false);
       });
   };
@@ -65,9 +72,15 @@ const AllPetsSupplies = () => {
       </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-11/12 mx-auto my-10 ">
-        {models.map((model) => (
-          <PetsSuppliesCard key={model._id} model={model}></PetsSuppliesCard>
-        ))}
+        {Array.isArray(models) && models.length > 0 ? (
+          models.map((model) => (
+            <PetsSuppliesCard key={model._id} model={model}></PetsSuppliesCard>
+          ))
+        ) : (
+          <p className="text-center col-span-full text-gray-500 my-8">
+            No pets or supplies found.
+          </p>
+        )}
       </div>
     </div>
   );
