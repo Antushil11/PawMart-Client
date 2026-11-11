@@ -7,7 +7,7 @@ import PetHeroes from "../../Pages/PetHeroes/PetHeroes";
 import { fallbackListings } from "../../data/mockData";
 
 const recentListtingPromise = fetch(
-  "https://pawmartserver-lemon.vercel.app/latest-models"
+  "https://paw-mart-server-neon.vercel.app/latest-models"
 )
   .then((res) => {
     if (!res.ok) return fallbackListings;

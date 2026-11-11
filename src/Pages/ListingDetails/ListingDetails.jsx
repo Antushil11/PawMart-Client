@@ -12,7 +12,7 @@ const ListingDetails = () => {
   const { user } = use(AuthContext);
 
   useEffect(() => {
-    fetch(`https://pawmartserver-lemon.vercel.app/models/${id}`, {
+    fetch(`https://paw-mart-server-neon.vercel.app/models/${id}`, {
       headers: {
         authorization: `Bearer ${user?.accessToken}`,
       },
@@ -86,7 +86,7 @@ const ListingDetails = () => {
       additional_notes: notes,
     };
 
-    fetch("https://pawmartserver-lemon.vercel.app/bids", {
+    fetch("https://paw-mart-server-neon.vercel.app/bids", {
       method: "POST",
       headers: {
         "content-type": "application/json",

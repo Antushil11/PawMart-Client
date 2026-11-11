@@ -14,7 +14,7 @@ const AllPetsSupplies = () => {
     console.log(search_text);
     setLoading(true);
 
-    fetch(`https://pawmartserver-lemon.vercel.app/search?search=${search_text}`)
+    fetch(`https://paw-mart-server-neon.vercel.app/search?search=${search_text}`)
       .then((res) => {
         if (!res.ok) return [];
         return res.json();

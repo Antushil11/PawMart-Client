@@ -20,7 +20,7 @@ const AddListing = () => {
       email: user.email,
     };
 
-    fetch(`https://pawmartserver-lemon.vercel.app/models`, {
+    fetch(`https://paw-mart-server-neon.vercel.app/models`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

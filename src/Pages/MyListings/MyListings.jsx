@@ -13,7 +13,7 @@ const MyListings = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`https://pawmartserver-lemon.vercel.app/models?email=${user.email}`)
+    fetch(`https://paw-mart-server-neon.vercel.app/models?email=${user.email}`)
       .then((res) => {
         if (!res.ok) return [];
         return res.json();
@@ -34,7 +34,7 @@ const MyListings = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://pawmartserver-lemon.vercel.app/models/${id}`, {
+        fetch(`https://paw-mart-server-neon.vercel.app/models/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -56,7 +56,7 @@ const MyListings = () => {
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
     fetch(
-      `https://pawmartserver-lemon.vercel.app/models/${selectedListing._id}`,
+      `https://paw-mart-server-neon.vercel.app/models/${selectedListing._id}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

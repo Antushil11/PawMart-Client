@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <AllPetsSupplies></AllPetsSupplies>,
         loader: async () => {
           try {
-            const res = await fetch("https://pawmartserver-lemon.vercel.app/models");
+            const res = await fetch("https://paw-mart-server-neon.vercel.app/models");
             if (!res.ok) return fallbackListings;
             const data = await res.json();
             return Array.isArray(data) && data.length > 0 ? data : fallbackListings;

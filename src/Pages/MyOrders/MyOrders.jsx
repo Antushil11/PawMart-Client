@@ -11,7 +11,7 @@ const MyOrders = () => {
   useEffect(() => {
     if (!user?.email) return;
     setLoading(true);
-    fetch(`https://pawmartserver-lemon.vercel.app/bids?email=${user.email}`, {
+    fetch(`https://paw-mart-server-neon.vercel.app/bids?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${user?.accessToken}`,
       },
